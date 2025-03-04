@@ -6,12 +6,18 @@ function FlightSearch() {
   const [destination, setDestination] = useState("");
   const [preference, setPreference] = useState("shortest_time");
   const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
   const searchFlights = async () => {
-    const res = await axios.get(`http://127.0.0.1:8000/search_flights/`, {
-      params: { origin, destination, preference },
-    });
-    setResult(res.data);
+    try {
+      setError(null);  // Clear previous errors
+      const res = await axios.get(`http://127.0.0.1:8000/search_flights/`, {
+        params: { origin, destination, preference },
+      });
+      setResult(res.data);
+    } catch (err) {
+      setError("Failed to fetch flight data. Please try again.");
+    }
   };
 
   return (
@@ -20,15 +26,17 @@ function FlightSearch() {
       <input type="text" value={origin} onChange={(e) => setOrigin(e.target.value)} placeholder="Origin" className="border p-2 w-full"/>
       <input type="text" value={destination} onChange={(e) => setDestination(e.target.value)} placeholder="Destination" className="border p-2 w-full mt-2"/>
       <button onClick={searchFlights} className="bg-blue-500 text-white p-2 mt-4 w-full">Find Route</button>
-      
-      {result && (
+
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+
+      {result && result.route ? (
         <div className="mt-4 p-4 bg-gray-100">
           <h2 className="text-lg font-bold">Optimal Route:</h2>
           <p>{result.route.join(" → ")}</p>
           <h2 className="text-lg font-bold mt-2">AI Recommendation:</h2>
           <p>{result.ai_recommendation}</p>
         </div>
-      )}
+      ) : result && <p className="mt-4">No available route found.</p>}
     </div>
   );
 }
