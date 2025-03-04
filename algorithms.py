@@ -1,7 +1,7 @@
 import sqlite3
 
 def get_flight_data():
-    conn = sqlite3.connect("data/flight.db")  # Ensure correct path
+    conn = sqlite3.connect("backend/data/flights.db")  
     cursor = conn.cursor()
     
     query = "SELECT flight_number, origin, destination, duration, layovers FROM flights"
@@ -14,17 +14,33 @@ def get_flight_data():
             "origin": row[1],
             "destination": row[2],
             "duration": row[3],
-            "layovers": row[4].split(",") if row[4] else []  # Assuming layovers are stored as comma-separated values
+            "layovers": row[4].split(",") if row[4] else []
         })
 
     conn.close()
     return flights
 
-# Dummy function to avoid import error
-def find_optimal_route(origin, destination):
-    return f"Optimal route from {origin} to {destination} (placeholder function)"
+# def find_optimal_route(origin, destination):
+#     flights = get_flight_data()
+    
+#     for flight in flights:
+#         if flight["origin"] == origin and flight["destination"] == destination:
+#             return [flight]
 
-# Example usage
-if __name__ == "__main__":
-    print(get_flight_data())
-    print(find_optimal_route("JFK", "LHR"))
+#     for flight1 in flights:
+#         for flight2 in flights:
+#             if flight1["origin"] == origin and flight1["destination"] == flight2["origin"] and flight2["destination"] == destination:
+#                 return [flight1, flight2]
+    
+#     return []  
+
+def find_optimal_route(origin, destination, preference):
+    # Example: Replace with actual flight data from a database or API
+    flight_routes = {
+        ("Chennai", "Dubai"): ["Chennai International Airport", "Indira Gandhi International Airport", "Dubai International Airport"],
+        ("Chennai", "Mumbai"): ["Chennai International Airport", "Chhatrapati Shivaji Maharaj International Airport"]
+    }
+    
+    return flight_routes.get((origin, destination), None)
+
+

@@ -31,6 +31,8 @@ if cursor.fetchone()[0] == 0:
         ("QR404", "DOH", "JFK", 780, "")
     ]
 
+
+
     cursor.executemany("INSERT INTO flights (flight_number, origin, destination, duration, layovers) VALUES (?, ?, ?, ?, ?)", sample_flights)
     conn.commit()
     print("✅ Database initialized with sample flight data.")
