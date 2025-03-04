@@ -1,0 +1,21 @@
+[
+    {"from": "MAA", "to": "DEL", "distance": 1760},
+    {"from": "DEL", "to": "DXB", "distance": 2180},
+    {"from": "JFK", "to": "LHR", "distance": 5540},
+    {"from": "CDG", "to": "NRT", "distance": 9710},
+    {"from": "DEL", "to": "LHR", "distance": 6700},
+    {"from": "DXB", "to": "LHR", "distance": 5500},
+    {"from": "MAA", "to": "DXB", "distance": 2934},
+    {"from": "MAA", "to": "SIN", "distance": 2920},
+    {"from": "DEL", "to": "BOM", "distance": 1145},
+    {"from": "BOM", "to": "JFK", "distance": 12540},
+    {"from": "SIN", "to": "LAX", "distance": 14100},
+    {"from": "DXB", "to": "SIN", "distance": 5830},
+    {"from": "LAX", "to": "JFK", "distance": 3990},
+    {"from": "LAX", "to": "NRT", "distance": 8790},
+    {"from": "NRT", "to": "SIN", "distance": 5330},
+    {"from": "DXB", "to": "NRT", "distance": 7900},
+    {"from": "SYD", "to": "SIN", "distance": 6300},
+    {"from": "SYD", "to": "DXB", "distance": 12050},
+    {"from": "SYD", "to": "LAX", "distance": 12000}
+]

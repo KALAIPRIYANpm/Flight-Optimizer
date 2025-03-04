@@ -8,8 +8,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],  # Allow frontend requests
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
 )
 
 @app.get("/")
@@ -17,14 +17,14 @@ def home():
     return {"message": "Flight Route Optimizer API is running!"}
 
 @app.get("/search_flights/")
-async def search_flights(origin: str, destination: str, preference: str):
+async def search_flights(origin: str, destination: str):
     # Call your route-finding algorithm
-    route = find_optimal_route(origin, destination, preference)
+    route = find_optimal_route(origin, destination)  # REMOVE `preference`
     
     if not route:
         return {"message": "No available route"}
 
     return {
         "route": route,  # Return the actual route
-        "ai_recommendation": f"Best route from {origin} to {destination} based on {preference}"
+        "ai_recommendation": f"Best route from {origin} to {destination}"
     }
