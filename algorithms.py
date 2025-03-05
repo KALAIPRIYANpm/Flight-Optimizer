@@ -30,9 +30,9 @@ def find_optimal_route(origin, destination):
     destination_code = city_to_airport.get(destination)
 
     if not origin_code or not destination_code:
-        return None  # Invalid city names
+        return None  
 
-    # Priority queue: (current_distance, airport_code, path_so_far)
+    
     pq = [(0, origin_code, [])]
     visited = set()
 
@@ -44,16 +44,14 @@ def find_optimal_route(origin, destination):
         visited.add(airport)
         path = path + [airport]
 
-        # If destination is reached, return the airport names in the route
         if airport == destination_code:
             return [get_airport_name(code) for code in path]
 
-        # Explore neighbors
         for neighbor, dist in graph.get(airport, []):
             if neighbor not in visited:
                 heapq.heappush(pq, (distance + dist, neighbor, path))
 
-    return None  # No route found
+    return None 
 
 
 def get_airport_name(code):
@@ -61,7 +59,7 @@ def get_airport_name(code):
     for airport in airports:
         if airport["code"] == code:
             return airport["name"]
-    return code  # Return the code if no name is found
+    return code  
 
 def calculate_distance(lat1, lon1, lat2, lon2):
     """
@@ -70,7 +68,7 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     """
     from math import radians, sin, cos, sqrt, atan2
 
-    R = 6371  # Radius of Earth in km
+    R = 6371  
 
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
 
@@ -80,4 +78,4 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-    return R * c  # Distance in km
+    return R * c  
